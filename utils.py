@@ -79,7 +79,11 @@ D. {option_d}
 ### Answer with the letter symbol only. Answer:
 """
 
-### ACR Evaluators
+'''
+ACR Evaluators
+This section of code was lifted from the following replication package.
+https://sites.google.com/view/chatgptcodereview
+'''
 def remove_comments(code):
     pattern = r'/\*.*?\*/|//.*?$'
     tmp_code = re.sub(pattern, '', code, flags=re.DOTALL|re.MULTILINE)
