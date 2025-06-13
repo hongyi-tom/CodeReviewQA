@@ -62,6 +62,23 @@ D. line numbers {option_d}
 ### Answer with the letter symbol only. Answer:
 """
 
+si_prompt = """
+### The following is a multiple choice question (with answers) that tests code review comprehension. 
+Question: Given this {lang} code snippet, which code revision is the code review asking for?
+[{lang}]
+{code_snippet}
+[/{lang}]
+[CODE REVIEW]
+{code_review}
+[/CODE REVIEW]
+### Possible answers:
+A. {option_a}
+B. {option_b}
+C. {option_c}
+D. {option_d}
+### Answer with the letter symbol only. Answer:
+"""
+
 ### ACR Evaluators
 def remove_comments(code):
     pattern = r'/\*.*?\*/|//.*?$'

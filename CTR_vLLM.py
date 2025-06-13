@@ -29,12 +29,12 @@ def prompt_combinations(example, language_type):
     correct_symbols = []
     for permutation in all_permutations:
         correct_symbols.append(symbol_index_map[permutation.index(example.type_correct)])
-        prompts.append(ctr_prompt.format(lang=language_type, 
-                                 option_a=ct_formatter[permutation[0]],
-                                 option_b=ct_formatter[permutation[1]],
-                                 option_c=ct_formatter[permutation[2]],
-                                 code_snippet=remove_diffs(example.old),
-                                 code_review=example.review))
+        prompts.append(ctr_prompt.format(lang = language_type, 
+                                 option_a = ct_formatter[permutation[0]],
+                                 option_b = ct_formatter[permutation[1]],
+                                 option_c = ct_formatter[permutation[2]],
+                                 code_snippet = remove_diffs(example.old),
+                                 code_review = example.review))
     return prompts, correct_symbols, all_permutations
 
 ### Evaluation
@@ -63,11 +63,11 @@ def test_example(example, tokenizer, llm, sampling_params, language_type):
         
     example_record = [combinations, 
                 model_answers, 
-                [max(symbol_probs, key=symbol_probs.get) for symbol_probs in model_answers],
+                [max(symbol_probs, key = symbol_probs.get) for symbol_probs in model_answers],
                 correct_answers,
                 example.type_correct]
 
-    return pd.DataFrame([example_record], columns=['combinations', 'softmax_probs', 'model_answers', 'correct_answers','GT'])
+    return pd.DataFrame([example_record], columns = ['combinations', 'softmax_probs', 'model_answers', 'correct_answers','GT'])
 
 ### Run Test
 def main():
