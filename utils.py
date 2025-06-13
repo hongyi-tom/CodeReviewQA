@@ -45,6 +45,23 @@ C. {option_c}
 ### Answer with the letter symbol only. Answer:
 """
 
+cl_prompt = """
+### The following is a multiple choice question (with answers) that tests code review comprehension. 
+Question: Given this {lang} code snippet, which line numbers is the code review asking to {ct}?
+[{lang}]
+{code_snippet}
+[/{lang}]
+[CODE REVIEW]
+{code_review}
+[/CODE REVIEW]
+### Possible answers:
+A. line numbers {option_a}
+B. line numbers {option_b}
+C. line numbers {option_c}
+D. line numbers {option_d}
+### Answer with the letter symbol only. Answer:
+"""
+
 ### ACR Evaluators
 def remove_comments(code):
     pattern = r'/\*.*?\*/|//.*?$'

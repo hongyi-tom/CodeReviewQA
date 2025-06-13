@@ -14,6 +14,10 @@ from vllm.sampling_params import GuidedDecodingParams
 from vllm.distributed.parallel_state import destroy_model_parallel
 from utils import ctr_prompt, ct_formatter, remove_diffs, count_matching_elements, calc_results
 
+### Silent Logging
+logging.set_verbosity_error()
+warnings.filterwarnings("ignore")
+
 ### Prompt Constructor
 def prompt_combinations(example, language_type):
     symbol_index_map = {0:'A', 1:'B', 2:'C'}
@@ -70,35 +74,36 @@ def main():
     login(token = sys.argv[1])
     language_type = sys.argv[2]
     model_name = sys.argv[3]
+    mcqa_set = pd.read_json("hf://datasets/Tomo-Melb/CodeReviewQA/CodeReviewQA.jsonl", lines = True)
 
     # Ingest Data 
     if language_type == "C":
         mcqa_set = mcqa_set.loc[mcqa_set['lang'] == "c"]
-        save_dir = 'results/change_type_recognition/c/ctr_c_' + model_name.split("/")[1] + '.pkl'
+        save_dir = 'results/ctr/c/ctr_c_' + model_name.split("/")[1] + '.pkl'
     elif language_type == "CPP":
         mcqa_set = mcqa_set.loc[mcqa_set['lang'] == "cpp"]
-        save_dir = 'results/change_type_recognition/cpp/ctr_cpp_' + model_name.split("/")[1] + '.pkl'
+        save_dir = 'results/ctr/cpp/ctr_cpp_' + model_name.split("/")[1] + '.pkl'
     elif language_type == "CSharp":
         mcqa_set = mcqa_set.loc[mcqa_set['lang'] == "csharp"]
-        save_dir = 'results/change_type_recognition/csharp/ctr_csharp_' + model_name.split("/")[1] + '.pkl'
+        save_dir = 'results/ctr/csharp/ctr_csharp_' + model_name.split("/")[1] + '.pkl'
     elif language_type == "Go":
         mcqa_set = mcqa_set.loc[mcqa_set['lang'] == "go"]
-        save_dir = 'results/change_type_recognition/go/ctr_go_' + model_name.split("/")[1] + '.pkl'
+        save_dir = 'results/ctr/go/ctr_go_' + model_name.split("/")[1] + '.pkl'
     elif language_type == "Java":
         mcqa_set = mcqa_set.loc[mcqa_set['lang'] == "java"]
-        save_dir = 'results/change_type_recognition/java/ctr_java_' + model_name.split("/")[1] + '.pkl'
+        save_dir = 'results/ctr/java/ctr_java_' + model_name.split("/")[1] + '.pkl'
     elif language_type == "JavaScript":
         mcqa_set = mcqa_set.loc[mcqa_set['lang'] == "javascript"]
-        save_dir = 'results/change_type_recognition/javascript/ctr_javascript_' + model_name.split("/")[1] + '.pkl'
+        save_dir = 'results/ctr/javascript/ctr_javascript_' + model_name.split("/")[1] + '.pkl'
     elif language_type == "PHP":
         mcqa_set = mcqa_set.loc[mcqa_set['lang'] == "php"]
-        save_dir = 'results/change_type_recognition/php/ctr_php_' + model_name.split("/")[1] + '.pkl'
+        save_dir = 'results/ctr/php/ctr_php_' + model_name.split("/")[1] + '.pkl'
     elif language_type == "Python":
         mcqa_set = mcqa_set.loc[mcqa_set['lang'] == "python"]
-        save_dir = 'results/change_type_recognition/python/ctr_python_' + model_name.split("/")[1] + '.pkl'
+        save_dir = 'results/ctr/python/ctr_python_' + model_name.split("/")[1] + '.pkl'
     elif language_type == "Ruby":
         mcqa_set = mcqa_set.loc[mcqa_set['lang'] == "ruby"]
-        save_dir = 'results/change_type_recognition/ruby/ctr_ruby_' + model_name.split("/")[1] + '.pkl'
+        save_dir = 'results/ctr/ruby/ctr_ruby_' + model_name.split("/")[1] + '.pkl'
 
     # Import Model
     tokenizer = AutoTokenizer.from_pretrained(model_name)
