@@ -10,7 +10,7 @@ from huggingface_hub import login
 from vllm import LLM, SamplingParams
 from transformers import AutoTokenizer
 import evaluator.evaluation as evaluation
-from utils import acr_prompt, remove_diffs
+from utils import acr_prompt, remove_diffs, myeval
 from vllm.distributed.parallel_state import destroy_model_parallel
 
 ### Silent Logging
@@ -32,9 +32,9 @@ def test_prompt(test_set, language_type):
 ### Evaluation
 def save_eval(gold, output):
     generated = "\n".join([line[2:] for line in output.text.split("\n")])
-    result = evaluation.myeval(gold, generated)
+    result = myeval(gold, generated)
     record = [generated] + list(result)
-    return pd.DataFrame([record], columns = ['generation', 'em', 'em_trim', 'em_no_space', 'em_no_comment', 'bleu', 'bleu_trim'])
+    return pd.DataFrame([record], columns = ['generation', 'em', 'em_trim', 'em_no_space', 'em_no_comment'])
 
 ### Run Test
 def main():
@@ -84,7 +84,7 @@ def main():
     outputs = llm.generate(test_prompts, sampling_params)
     
     # Save Results
-    c_save = pd.DataFrame(columns = ['generation', 'em', 'em_trim', 'em_no_space', 'em_no_comment', 'bleu', 'bleu_trim'])
+    c_save = pd.DataFrame(columns = ['generation', 'em', 'em_trim', 'em_no_space', 'em_no_comment'])
     for row in tqdm(range(len(outputs))):
         gold = "\n".join([line[1:] for line in mcqa_set.iloc[row].new.split("\n")])
         c_save = pd.concat([c_save, save_eval(gold, outputs[row].outputs[0])])
@@ -95,7 +95,6 @@ def main():
     print("EM_TRIM: ", c_save.em.sum())
     print("EM_NO_SPACE: ", c_save.em_no_space.sum())
     print("EM__NO_COMMENT: ", c_save.em_no_comment.sum())
-    print("BLEU_TRIM: ", c_save.bleu_trim.mean())
     
     # Release Cache
     destroy_model_parallel()
