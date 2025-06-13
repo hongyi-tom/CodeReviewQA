@@ -9,7 +9,6 @@ from transformers import logging
 from huggingface_hub import login
 from vllm import LLM, SamplingParams
 from transformers import AutoTokenizer
-import evaluator.evaluation as evaluation
 from utils import acr_prompt, remove_diffs, myeval
 from vllm.distributed.parallel_state import destroy_model_parallel
 

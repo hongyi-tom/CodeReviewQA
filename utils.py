@@ -23,7 +23,29 @@ acr_prompt = """
 [{lang}]
 """
 
-### Evaluators
+ct_formatter = {
+    "add_only" : "only add new lines of code",
+    "remove_only" : "only delete existing lines of code",
+    "modify" : "modify the code"
+}
+
+ctr_prompt = """
+### The following is a multiple choice question (with answers) that tests code review comprehension. 
+Question: Given this {lang} code snippet, what type of change is the code review asking for?
+[{lang}]
+{code_snippet}
+[/{lang}]
+[CODE REVIEW]
+{code_review}
+[/CODE REVIEW]
+### Possible answers:
+A. {option_a}
+B. {option_b}
+C. {option_c}
+### Answer with the letter symbol only. Answer:
+"""
+
+### ACR Evaluators
 def remove_comments(code):
     pattern = r'/\*.*?\*/|//.*?$'
     tmp_code = re.sub(pattern, '', code, flags=re.DOTALL|re.MULTILINE)
@@ -115,3 +137,16 @@ def myeval(gold, pred):
     em_no_space = get_em_no_space(gold, pred)
     em_no_comment = get_em_no_comment(gold, pred)
     return em, em_trim, em_no_space, em_no_comment
+
+### MCQA Evaluators
+def count_matching_elements(arr1, arr2):
+    return sum(1 for a, b in zip(arr1, arr2) if a == b)
+
+def calc_results(results):
+    correct_responses = []
+    for row in range(len(results)):
+        x = results.iloc[row]
+        correct_responses.append(count_matching_elements(x.model_answers, x.correct_answers))
+        
+    print("Invariant Accuracy (Out of 100): ", len(results.loc[results['model_answers'] == results['correct_answers']]))
+    print("Avg Correct Answers (Out of 6):", sum(correct_responses)/len(correct_responses))
