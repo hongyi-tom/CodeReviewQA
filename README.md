@@ -4,8 +4,7 @@
 <a href="https://huggingface.co/datasets/Tomo-Melb/CodeReviewQA"><img src="https://img.shields.io/badge/%F0%9F%A4%97-Benchmark-%23FFCC4D"></a>
 <a href="https://arxiv.org/abs/2503.16167"><img src="https://img.shields.io/badge/arXiv-2503.16167-b31b1b?"></a>
 <a href="https://github.com/hongyi-tom/CodeReviewQA"><img src="https://img.shields.io/badge/GitHub-Repo-blue?logo=github"></a>
-<a href="https://github.com/hongyi-tom/CodeReviewQA/blob/main/LICENSE"><img src="https://img.shields.io/badge/License-MIT-green
-"></a>
+<a href="https://github.com/hongyi-tom/CodeReviewQA/blob/main/LICENSE"><img src="https://img.shields.io/badge/License-MIT-green"></a>
 </p>
 
 The repository contains inference scripts for reproducing experiments in [CodeReviewQA: The Code Review Comprehension Assessment for Large Language Models](https://arxiv.org/abs/2503.16167)
