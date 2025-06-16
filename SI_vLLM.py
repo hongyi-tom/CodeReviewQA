@@ -84,38 +84,13 @@ def test_example(example, tokenizer, llm, sampling_params, mode, language_type):
 def main():
     login(token = sys.argv[1])
     language_type = sys.argv[2]
+    lang = language_type.lower()
     mode = sys.argv[3]
     model_name = sys.argv[4]
+    model_name_short = model_name.split("/")[1]
     mcqa_set = pd.read_json("hf://datasets/Tomo-Melb/CodeReviewQA/CodeReviewQA.jsonl", lines = True)
-    
-    # Ingest Data 
-    if language_type == "C":
-        mcqa_set = mcqa_set.loc[mcqa_set['lang'] == "c"]
-        save_dir = 'results/si/c/' + mode + '/sol_' + mode + '_c_' + model_name.split("/")[1] + '.pkl'
-    elif language_type == "CPP":
-        mcqa_set = mcqa_set.loc[mcqa_set['lang'] == "cpp"]
-        save_dir = 'results/si/cpp/' + mode + '/sol_' + mode + '_cpp_' + model_name.split("/")[1] + '.pkl'
-    elif language_type == "CSharp":
-        mcqa_set = mcqa_set.loc[mcqa_set['lang'] == "csharp"]
-        save_dir = 'results/si/csharp/' + mode + '/sol_' + mode + '_csharp_' + model_name.split("/")[1] + '.pkl'
-    elif language_type == "Go":
-        mcqa_set = mcqa_set.loc[mcqa_set['lang'] == "go"]
-        save_dir = 'results/si/go/' + mode + '/sol_' + mode + '_go_' + model_name.split("/")[1] + '.pkl'
-    elif language_type == "Java":
-        mcqa_set = mcqa_set.loc[mcqa_set['lang'] == "java"]
-        save_dir = 'results/si/java/' + mode + '/sol_' + mode + '_java_' + model_name.split("/")[1] + '.pkl'
-    elif language_type == "JavaScript":
-        mcqa_set = mcqa_set.loc[mcqa_set['lang'] == "javascript"]
-        save_dir = 'results/si/javascript/' + mode + '/sol_' + mode + '_javascript_' + model_name.split("/")[1] + '.pkl'
-    elif language_type == "PHP":
-        mcqa_set = mcqa_set.loc[mcqa_set['lang'] == "php"]
-        save_dir = 'results/si/php/' + mode + '/sol_' + mode + '_php_' + model_name.split("/")[1] + '.pkl'
-    elif language_type == "Python":
-        mcqa_set = mcqa_set.loc[mcqa_set['lang'] == "python"]
-        save_dir = 'results/si/python/' + mode + '/sol_' + mode + '_python_' + model_name.split("/")[1] + '.pkl'
-    elif language_type == "Ruby":
-        mcqa_set = mcqa_set.loc[mcqa_set['lang'] == "ruby"]
-        save_dir = 'results/si/ruby/' + mode + '/sol_' + mode + '_ruby_' + model_name.split("/")[1] + '.pkl'
+    mcqa_set = mcqa_set.loc[mcqa_set['lang'] == lang]
+    save_dir = f"results/si/{lang}/{mode}/si_{mode}_{lang}_{model_name_short}.pkl"
     
     # Import Model
     tokenizer = AutoTokenizer.from_pretrained(model_name)
