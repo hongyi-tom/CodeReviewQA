@@ -94,10 +94,6 @@ python3 SI_vLLM.py <huggingface_token> <language> <mode> <model_name>
       Gao, Haoyu  and
       Thongtanunam, Patanamon  and
       Treude, Christoph",
-    editor = "Che, Wanxiang  and
-      Nabende, Joyce  and
-      Shutova, Ekaterina  and
-      Pilehvar, Mohammad Taher",
     booktitle = "Findings of the Association for Computational Linguistics: ACL 2025",
     month = jul,
     year = "2025",
