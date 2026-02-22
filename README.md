@@ -87,10 +87,25 @@ python3 SI_vLLM.py <huggingface_token> <language> <mode> <model_name>
 
 ##  Reference
 ```
-@article{lin2025codereviewqa,
-  title={CodeReviewQA: The Code Review Comprehension Assessment for Large Language Models},
-  author={Lin, Hong Yi and Liu, Chunhua and Gao, Haoyu and Thongtanunam, Patanamon and Treude, Christoph},
-  journal={arXiv preprint arXiv:2503.16167},
-  year={2025}
+@inproceedings{lin-etal-2025-codereviewqa,
+    title = "{C}ode{R}eview{QA}: The Code Review Comprehension Assessment for Large Language Models",
+    author = "Lin, Hong Yi  and
+      Liu, Chunhua  and
+      Gao, Haoyu  and
+      Thongtanunam, Patanamon  and
+      Treude, Christoph",
+    editor = "Che, Wanxiang  and
+      Nabende, Joyce  and
+      Shutova, Ekaterina  and
+      Pilehvar, Mohammad Taher",
+    booktitle = "Findings of the Association for Computational Linguistics: ACL 2025",
+    month = jul,
+    year = "2025",
+    address = "Vienna, Austria",
+    publisher = "Association for Computational Linguistics",
+    url = "https://aclanthology.org/2025.findings-acl.476/",
+    doi = "10.18653/v1/2025.findings-acl.476",
+    pages = "9138--9166",
+    ISBN = "979-8-89176-256-5"
 }
 ```
