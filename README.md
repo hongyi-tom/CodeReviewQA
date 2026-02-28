@@ -89,11 +89,7 @@ python3 SI_vLLM.py <huggingface_token> <language> <mode> <model_name>
 ```
 @inproceedings{lin-etal-2025-codereviewqa,
     title = "{C}ode{R}eview{QA}: The Code Review Comprehension Assessment for Large Language Models",
-    author = "Lin, Hong Yi  and
-      Liu, Chunhua  and
-      Gao, Haoyu  and
-      Thongtanunam, Patanamon  and
-      Treude, Christoph",
+    author = "Lin, Hong Yi  and Liu, Chunhua  and Gao, Haoyu  and Thongtanunam, Patanamon  and Treude, Christoph",
     booktitle = "Findings of the Association for Computational Linguistics: ACL 2025",
     month = jul,
     year = "2025",
